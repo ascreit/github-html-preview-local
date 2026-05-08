@@ -1,0 +1,2 @@
+# github-html-preview-local
+GitHubで表示中のHTMLソースを、アクセストークンなしでローカルプレビューするChrome拡張
