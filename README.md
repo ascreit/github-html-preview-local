@@ -1,70 +1,85 @@
 # GitHub HTML Preview Local
 
+![Chrome Extension](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-1f6feb)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6)
+![No Token](https://img.shields.io/badge/GitHub%20Token-Not%20Required-238636)
+![License](https://img.shields.io/badge/License-MIT-6f42c1)
+
 Preview HTML files directly inside GitHub's file view, without entering a GitHub access token.
 
-This extension adds a Preview button to GitHub HTML file pages. It reads the HTML source that is already displayed on the current GitHub file page and renders it in the same file panel. It is designed for quick checks of HTML files in both public repositories and repositories you can already access in your browser.
+GitHub HTML Preview Local adds a **Preview** button beside GitHub's Raw file controls. It reads the HTML source already visible on the current GitHub file page and renders it in the same file panel, including relative CSS and image assets when they are accessible through GitHub raw URLs.
 
-## Features
+![GitHub HTML Preview Local screenshot](docs/images/ss1.png)
 
-- Adds a Preview button to GitHub `.html` file pages
-- Switches the GitHub file panel between source code and rendered preview
-- No GitHub access token required
-- Works from the HTML source already visible in the GitHub page
+## Highlights
+
+- Preview `.html` and `.htm` files without leaving GitHub
+- No GitHub access token, API call, or external preview server required
+- Uses the source code already rendered in your browser
 - Resolves relative CSS and image paths through GitHub raw file URLs
-- Renders the preview in an extension sandbox frame to avoid GitHub page CSP restrictions
-- Useful for private repositories when the file is already visible to you on GitHub
+- Renders inside an extension-owned sandbox frame to avoid GitHub page CSP issues
+- Useful for public repositories and private repositories you can already view in GitHub
 
 ## How It Works
 
 1. Open an HTML file on GitHub.
-2. Click the Preview button added beside GitHub's Raw file controls.
-3. The extension reads the displayed source code from the page.
-4. The HTML is rendered inside the current GitHub file panel.
+2. Click **Preview** beside GitHub's Raw file controls.
+3. The extension captures the visible source from the file page.
+4. The preview replaces the code panel in the current GitHub view.
+5. Click **Code** to switch back to the original source view.
 
-The extension does not need to call the GitHub API to read the current file, because it uses the content already shown in the browser. Relative assets are resolved from GitHub raw URLs and rendered inside an extension-owned sandbox frame.
+The extension does not call the GitHub API to read the current file. It only uses content already available in the page you are viewing.
 
-## Privacy
-
-This extension is intended to preview the current GitHub HTML file locally.
-
-- It does not require a GitHub access token.
-- It does not upload your repository content to an external server.
-- It only targets GitHub pages needed for previewing displayed HTML files.
-
-## Limitations
-
-Because the extension previews the displayed source instead of fetching repository files through the GitHub API, some behavior may differ from a deployed website.
-
-- Relative paths are resolved against GitHub raw URLs, so assets must be accessible from the current browser session.
-- Files that are not displayed on the current GitHub page may not be available to the preview.
-- GitHub UI changes may require updates to the extension.
-- JavaScript execution is disabled in the rendered preview sandbox.
-
-## Intended Use
-
-This extension is best for quickly checking simple HTML files, prototypes, documentation pages, and small static examples directly from GitHub.
-
-It is not intended to replace a full local development server or GitHub Pages deployment for complex websites.
-
-## Development
-
-The extension source is organized so `src/` contains the editable source and `dist/` contains the unpacked Chrome extension output.
+## Install Locally
 
 ```sh
 npm install
+npm run build
+```
+
+Then load the built extension:
+
+1. Open `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked**.
+4. Select the `dist` directory.
+
+After source changes, run `npm run build` again and reload the extension from `chrome://extensions`.
+
+## Development
+
+```sh
 npm run check
 npm run build
 ```
 
-To try the extension locally:
+Project layout:
 
-1. Open `chrome://extensions`.
-2. Enable Developer mode.
-3. Click "Load unpacked".
-4. Select the `dist` directory.
+```text
+src/extension/          Static extension files
+src/scripts/            TypeScript source for content/background/sandbox scripts
+src/types/              Minimal Chrome API type declarations
+scripts/                Build helper scripts
+dist/                   Built unpacked extension
+docs/images/ss1.png     README screenshot
+```
 
-After making source changes, run `npm run build` and reload the extension from `chrome://extensions`.
+## Privacy
 
-## Repository
+- No GitHub access token is required.
+- Repository content is not uploaded to an external service.
+- Preview rendering happens in your browser.
+- The extension targets GitHub pages needed for previewing displayed HTML files.
 
-This project is under development.
+## Limitations
+
+- Relative assets must be accessible from the current browser session through GitHub raw URLs.
+- Files not shown on the current GitHub page are not fetched through the GitHub API.
+- JavaScript execution is disabled in the rendered preview sandbox.
+- GitHub UI changes may require updates to the DOM integration.
+
+## Intended Use
+
+This extension is best for quick checks of simple HTML files, prototypes, documentation pages, and small static examples directly from GitHub.
+
+It is not intended to replace a local development server or GitHub Pages deployment for complex websites.
