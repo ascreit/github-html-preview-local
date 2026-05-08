@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Chen — Frontend Developer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #1a1a2e;
+    --paper:  #f5f2ec;
+    --accent: #c8553d;
+    --gold:   #d4a847;
+    --muted:  #6b6b7b;
+    --border: #e0dbd2;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(245, 242, 236, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 3rem;
+    position: relative;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; right: 0; top: 15%; bottom: 15%;
+    width: 1px; background: var(--border);
+  }
+  .hero-tag {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block; width: 2rem; height: 1px; background: var(--accent);
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--accent);
+  }
+  .hero-subtitle {
+    font-size: 1rem; color: var(--muted); font-weight: 300;
+    max-width: 36ch; margin: 1.75rem 0 3rem;
+    line-height: 1.75;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+    text-decoration: none; transition: all 0.22s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--paper);
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(200,85,61,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(212,168,71,0.12) 0%, transparent 50%);
+  }
+  .hero-card {
+    position: relative; z-index: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 2.5rem;
+    backdrop-filter: blur(8px);
+    max-width: 400px; width: 100%;
+  }
+  .avatar-ring {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; color: white;
+    margin-bottom: 1.75rem;
+  }
+  .hero-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: white; margin-bottom: 0.25rem;
+  }
+  .hero-card .role {
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .stat-row { display: flex; gap: 2rem; margin-bottom: 2rem; }
+  .stat { text-align: center; }
+  .stat .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: white; display: block; line-height: 1;
+  }
+  .stat .label {
+    font-size: 0.7rem; color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.25rem;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .pill {
+    padding: 0.3rem 0.85rem; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.02em;
+    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ── WORK ── */
+  section { padding: 7rem 3rem; }
+
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 4rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem; color: var(--border); line-height: 1;
+    margin-right: 1rem; user-select: none;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem; letter-spacing: -0.02em;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-link {
+    font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .section-link:hover { color: var(--accent); }
+
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .project-card {
+    background: white; padding: 2.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-num {
+    font-family: 'DM Serif Display', serif; font-size: 0.9rem;
+    color: var(--muted); margin-bottom: 1.25rem;
+  }
+  .project-card h3 {
+    font-family: 'DM Serif Display', serif; font-size: 1.4rem;
+    margin-bottom: 0.75rem; letter-spacing: -0.01em;
+  }
+  .project-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.75rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    padding: 0.25rem 0.7rem; border-radius: 2px;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em;
+    background: var(--paper); color: var(--ink); text-transform: uppercase;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { font-size: 1.05rem; line-height: 1.85; color: #3a3a4a; margin-bottom: 1.5rem; }
+  .about-text p strong { color: var(--ink); font-weight: 500; }
+
+  .about-side h4 {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.5rem;
+  }
+  .exp-list { list-style: none; margin-bottom: 3rem; }
+  .exp-item {
+    display: grid; grid-template-columns: 1fr auto;
+    padding: 1rem 0; border-bottom: 1px solid var(--border);
+    gap: 1rem;
+  }
+  .exp-item .company { font-weight: 500; font-size: 0.95rem; }
+  .exp-item .exp-role { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+  .exp-item .years { font-size: 0.78rem; color: var(--muted); white-space: nowrap; padding-top: 0.1rem; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--ink); color: var(--paper); margin: 0 3rem;
+    padding: 5rem; border-radius: 4px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    margin-bottom: 3rem;
+  }
+  .contact-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem; letter-spacing: -0.02em; line-height: 1.1;
+  }
+  .contact-section h2 em { font-style: italic; color: var(--gold); }
+  .contact-section p { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.75; margin-top: 1.25rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    color: white; text-decoration: none; font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); }
+  .contact-link .arrow { opacity: 0.4; transition: opacity 0.2s, transform 0.2s; }
+  .contact-link:hover .arrow { opacity: 1; transform: translate(3px, -3px); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 2.5rem 3rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* ── DECORATIVE ── */
+  .marquee-strip {
+    overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 1rem 0; background: white;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-inner span {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem; color: var(--muted);
+    letter-spacing: 0.04em;
+    margin: 0 2rem;
+  }
+  .marquee-inner span.dot { color: var(--accent); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Alex Chen</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Available for projects</p>
+    <h1 class="hero-title">
+      Frontend<br>
+      <em>Developer</em><br>
+      &amp; Designer
+    </h1>
+    <p class="hero-subtitle">
+      I craft high-performance web interfaces where
+      engineering precision meets deliberate visual design.
+      Based in Tokyo — working globally.
+    </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">View Work →</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="avatar-ring">A</div>
+      <h3>Alex Chen</h3>
+      <p class="role">Frontend Developer · 7 yrs</p>
+      <div class="stat-row">
+        <div class="stat"><span class="num">42</span><span class="label">Projects</span></div>
+        <div class="stat"><span class="num">18</span><span class="label">Clients</span></div>
+        <div class="stat"><span class="num">7</span><span class="label">Awards</span></div>
+      </div>
+      <div class="skill-pills">
+        <span class="pill">React</span>
+        <span class="pill">TypeScript</span>
+        <span class="pill">Three.js</span>
+        <span class="pill">Figma</span>
+        <span class="pill">Next.js</span>
+        <span class="pill">Motion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>React</span><span class="dot">·</span>
+    <span>TypeScript</span><span class="dot">·</span>
+    <span>Next.js</span><span class="dot">·</span>
+    <span>Three.js</span><span class="dot">·</span>
+    <span>Figma</span><span class="dot">·</span>
+    <span>Motion</span><span class="dot">·</span>
+    <span>WebGL</span><span class="dot">·</span>
+    <span>GSAP</span><span class="dot">·</span>
+    <span>Tailwind</span><span class="dot">·</span>
+    <span>Node.js</span><span class="dot">·</span>
+    <span>React</span><span class="dot">·</span>
+    <span>TypeScript</span><span class="dot">·</span>
+    <span>Next.js</span><span class="dot">·</span>
+    <span>Three.js</span><span class="dot">·</span>
+    <span>Figma</span><span class="dot">·</span>
+    <span>Motion</span><span class="dot">·</span>
+    <span>WebGL</span><span class="dot">·</span>
+    <span>GSAP</span><span class="dot">·</span>
+    <span>Tailwind</span><span class="dot">·</span>
+    <span>Node.js</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-header">
+    <div style="display:flex;align-items:baseline;gap:1rem">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Selected <em>Work</em></h2>
+    </div>
+    <a href="#" class="section-link">All Projects ↗</a>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <p class="project-num">01 / 2024</p>
+      <h3>Luminary Design System</h3>
+      <p>A comprehensive component library for a Series B fintech startup. 80+ components, dark mode, full accessibility, and Figma token sync.</p>
+      <div class="project-tags">
+        <span class="tag">React</span>
+        <span class="tag">Storybook</span>
+        <span class="tag">Figma</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <p class="project-num">02 / 2024</p>
+      <h3>Orbit Analytics Dashboard</h3>
+      <p>Real-time data visualization platform for logistics. Custom WebGL chart engine renders 1M+ data points at 60fps.</p>
+      <div class="project-tags">
+        <span class="tag">Three.js</span>
+        <span class="tag">WebGL</span>
+        <span class="tag">TypeScript</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <p class="project-num">03 / 2023</p>
+      <h3>Solstice E-commerce</h3>
+      <p>Luxury fashion storefront with immersive product experiences. Achieved 40% lift in conversion through interaction redesign.</p>
+      <div class="project-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">GSAP</span>
+        <span class="tag">Shopify</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <p class="project-num">04 / 2023</p>
+      <h3>Meridian Travel App</h3>
+      <p>Cross-platform travel planner with offline-first architecture and AI-powered itinerary generation for 200K+ users.</p>
+      <div class="project-tags">
+        <span class="tag">React Native</span>
+        <span class="tag">Expo</span>
+        <span class="tag">SQLite</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <p class="project-num">05 / 2022</p>
+      <h3>Helix Medical Portal</h3>
+      <p>Patient management platform for 12 clinics. HIPAA-compliant, bilingual (EN/JP), integrated with 3 EHR systems.</p>
+      <div class="project-tags">
+        <span class="tag">Vue 3</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">FHIR</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <p class="project-num">06 / 2022</p>
+      <h3>Cascade CMS</h3>
+      <p>Headless content management system with a visual block editor. Powers editorial workflows for 8 media publications.</p>
+      <div class="project-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">tRPC</span>
+        <span class="tag">Prisma</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background: white; margin: 0; padding: 7rem 3rem;">
+  <div class="section-header">
+    <div style="display:flex;align-items:baseline;gap:1rem">
+      <span class="section-num">02</span>
+      <h2 class="section-title">About <em>Me</em></h2>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a frontend developer with <strong>seven years of experience</strong> building
+        interfaces that sit at the intersection of engineering rigor and design clarity.
+        My work spans design systems, data-heavy applications, and consumer products
+        shipped to millions of users.
+      </p>
+      <p>
+        Before going independent, I led the frontend team at <strong>Neon Studio</strong>
+        in Tokyo, where I rebuilt their core product from jQuery to a modern React
+        architecture — reducing bundle size by 62% and halving time-to-interactive.
+      </p>
+      <p>
+        I care deeply about <strong>performance, accessibility, and the small details</strong>
+        that separate a good UI from a great one. I work in English and Japanese and
+        collaborate comfortably with distributed teams across time zones.
+      </p>
+    </div>
+
+    <div class="about-side">
+      <h4>Experience</h4>
+      <ul class="exp-list">
+        <li class="exp-item">
+          <div>
+            <div class="company">Freelance / Independent</div>
+            <div class="exp-role">Senior Frontend Developer</div>
+          </div>
+          <div class="years">2021 – Now</div>
+        </li>
+        <li class="exp-item">
+          <div>
+            <div class="company">Neon Studio</div>
+            <div class="exp-role">Lead Frontend Engineer</div>
+          </div>
+          <div class="years">2019 – 2021</div>
+        </li>
+        <li class="exp-item">
+          <div>
+            <div class="company">Vertex Digital</div>
+            <div class="exp-role">Frontend Developer</div>
+          </div>
+          <div class="years">2017 – 2019</div>
+        </li>
+      </ul>
+
+      <h4>Education</h4>
+      <ul class="exp-list">
+        <li class="exp-item">
+          <div>
+            <div class="company">Waseda University</div>
+            <div class="exp-role">B.Sc. Computer Science</div>
+          </div>
+          <div class="years">2013 – 2017</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="contact-section">
+    <div>
+      <h2>Let's build something <em>great</em> together.</h2>
+      <p>Open to full-time roles, contract work, and short consulting engagements. Response within 24 hours.</p>
+    </div>
+    <div class="contact-links">
+      <a href="#" class="contact-link">
+        <span>✉ alex@example.com</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span>⌥ github.com/alexchen</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span>in linkedin.com/in/alexchen</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span>𝕏 @alexchendev</span>
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2024 Alex Chen</span>
+  <span>Designed &amp; built by hand — Tokyo, Japan</span>
+</footer>
+
+</body>
+</html>
