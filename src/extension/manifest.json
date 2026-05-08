@@ -3,8 +3,20 @@
   "name": "GitHub HTML Preview Local",
   "description": "Preview the currently displayed GitHub HTML source locally, without a GitHub access token.",
   "version": "0.1.2",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
   "action": {
-    "default_title": "GitHub HTML Preview Local"
+    "default_title": "GitHub HTML Preview Local",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
   },
   "permissions": [
     "activeTab",

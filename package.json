@@ -6,7 +6,8 @@
   "description": "Chrome extension to preview the visible GitHub HTML source locally.",
   "scripts": {
     "build": "node scripts/clean-dist.mjs && tsc --project tsconfig.json && node scripts/copy-static.mjs",
-    "check": "tsc --noEmit --project tsconfig.json"
+    "check": "tsc --noEmit --project tsconfig.json",
+    "package": "npm run build && node scripts/package-extension.mjs"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

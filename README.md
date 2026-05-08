@@ -51,6 +51,7 @@ After source changes, run `npm run build` again and reload the extension from `c
 ```sh
 npm run check
 npm run build
+npm run package
 ```
 
 Project layout:
@@ -61,7 +62,9 @@ src/scripts/            TypeScript source for content/background/sandbox scripts
 src/types/              Minimal Chrome API type declarations
 scripts/                Build helper scripts
 dist/                   Built unpacked extension
+release/                Generated Chrome Web Store ZIP package
 docs/images/ss1.png     README screenshot
+docs/images/icon.png    Chrome Web Store icon source
 ```
 
 ## Privacy
