@@ -18,6 +18,7 @@ GitHub HTML Preview Local adds a **Preview** button beside GitHub's Raw file con
 - Uses the source code already rendered in your browser
 - Resolves relative CSS and image paths through GitHub raw file URLs
 - Renders inside an extension-owned sandbox frame to avoid GitHub page CSP issues
+- Includes English and Japanese extension messages
 - Useful for public repositories and private repositories you can already view in GitHub
 
 ## How It Works
@@ -58,6 +59,7 @@ Project layout:
 
 ```text
 src/extension/          Static extension files
+src/extension/_locales/ Extension locale messages
 src/scripts/            TypeScript source for content/background/sandbox scripts
 src/types/              Minimal Chrome API type declarations
 scripts/                Build helper scripts

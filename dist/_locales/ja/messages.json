@@ -1,0 +1,22 @@
+{
+  "extensionName": {
+    "message": "GitHub HTML Preview Local",
+    "description": "拡張機能名"
+  },
+  "extensionDescription": {
+    "message": "GitHubで表示中のHTMLソースを、アクセストークンなしでローカルプレビューします。",
+    "description": "拡張機能の説明"
+  },
+  "previewButton": {
+    "message": "プレビュー",
+    "description": "ソースコード表示からレンダリングプレビューへ切り替えるボタン"
+  },
+  "codeButton": {
+    "message": "コード",
+    "description": "レンダリングプレビューからソースコード表示へ戻すボタン"
+  },
+  "previewUnavailable": {
+    "message": "プレビュー不可",
+    "description": "現在のファイルをプレビューできない場合に一時的に表示するボタン"
+  }
+}

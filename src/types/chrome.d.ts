@@ -36,6 +36,10 @@ declare namespace chrome {
     function getURL(path: string): string;
   }
 
+  namespace i18n {
+    function getMessage(messageName: string): string;
+  }
+
   namespace action {
     const onClicked: {
       addListener(callback: (tab: tabs.Tab) => void | Promise<void>): void;

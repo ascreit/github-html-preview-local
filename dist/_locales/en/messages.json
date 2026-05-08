@@ -1,0 +1,22 @@
+{
+  "extensionName": {
+    "message": "GitHub HTML Preview Local",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Preview the currently displayed GitHub HTML source locally, without a GitHub access token.",
+    "description": "Extension description"
+  },
+  "previewButton": {
+    "message": "Preview",
+    "description": "Button label to switch from source code to rendered preview"
+  },
+  "codeButton": {
+    "message": "Code",
+    "description": "Button label to switch back from rendered preview to source code"
+  },
+  "previewUnavailable": {
+    "message": "Preview unavailable",
+    "description": "Temporary button label shown when the current file cannot be previewed"
+  }
+}

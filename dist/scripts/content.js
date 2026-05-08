@@ -15,6 +15,9 @@
     let previewFrame = null;
     let codeSurface = null;
     let previewVisible = false;
+    function message(name) {
+        return chrome.i18n.getMessage(name) || name;
+    }
     function normalizeLine(value) {
         return value
             .replace(/\u00a0/g, " ")
@@ -297,18 +300,18 @@
     }
     function setPreviewButtonState(button) {
         button.setAttribute("aria-pressed", String(previewVisible));
-        button.textContent = previewVisible ? "Code" : "Preview";
+        button.textContent = previewVisible ? message("codeButton") : message("previewButton");
     }
     function showPreview(button) {
         const payload = getCapturePayload();
         if (!payload) {
-            button.textContent = "Preview unavailable";
+            button.textContent = message("previewUnavailable");
             window.setTimeout(() => setPreviewButtonState(button), 1500);
             return;
         }
         codeSurface = findCodeSurface();
         if (!codeSurface) {
-            button.textContent = "Preview unavailable";
+            button.textContent = message("previewUnavailable");
             window.setTimeout(() => setPreviewButtonState(button), 1500);
             return;
         }
@@ -348,7 +351,7 @@
         button.id = BUTTON_ID;
         button.type = "button";
         button.className = "btn";
-        button.textContent = "Preview";
+        button.textContent = message("previewButton");
         button.setAttribute("aria-pressed", "false");
         button.addEventListener("click", () => {
             if (previewVisible) {
@@ -378,7 +381,7 @@
         button.id = FLOATING_BUTTON_ID;
         button.type = "button";
         button.className = "btn";
-        button.textContent = "Preview";
+        button.textContent = message("previewButton");
         button.setAttribute("aria-pressed", "false");
         button.addEventListener("click", () => {
             if (previewVisible) {
