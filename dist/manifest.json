@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub HTML Preview Local",
+  "description": "Preview the currently displayed GitHub HTML source locally, without a GitHub access token.",
+  "version": "0.1.2",
+  "action": {
+    "default_title": "GitHub HTML Preview Local"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://github.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "preview-sandbox.html",
+        "scripts/preview-sandbox.js"
+      ],
+      "matches": [
+        "https://github.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

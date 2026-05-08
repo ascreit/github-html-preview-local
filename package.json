@@ -1,0 +1,14 @@
+{
+  "name": "github-html-preview-local",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "description": "Chrome extension to preview the visible GitHub HTML source locally.",
+  "scripts": {
+    "build": "node scripts/clean-dist.mjs && tsc --project tsconfig.json && node scripts/copy-static.mjs",
+    "check": "tsc --noEmit --project tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
