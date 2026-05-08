@@ -12,7 +12,7 @@ await mkdir(releaseDir, { recursive: true });
 await rm(zipPath, { force: true });
 
 await new Promise((resolvePromise, reject) => {
-  const child = spawn("zip", ["-r", "-X", zipPath, "."], {
+  const child = spawn("zip", ["-r", "-X", zipPath, ".", "-x", "*.DS_Store"], {
     cwd: resolve(root, "dist"),
     stdio: "inherit"
   });
