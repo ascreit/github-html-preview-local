@@ -5,11 +5,13 @@
 ![No Token](https://img.shields.io/badge/GitHub%20Token-Not%20Required-238636)
 ![License](https://img.shields.io/badge/License-MIT-6f42c1)
 
+[Download Chrome Extension](https://chromewebstore.google.com/detail/github-html-preview-local/kjdbaiimkcnfaljchhalchbicopiaebk)
+
+![GitHub HTML Preview Local screenshot](docs/images/ss1.png)
+
 Preview HTML files directly inside GitHub's file view, without entering a GitHub access token.
 
 GitHub HTML Preview Local adds a **Preview** button beside GitHub's Raw file controls. It reads the HTML source already visible on the current GitHub file page and renders it in the same file panel, including relative CSS and image assets when they are accessible through GitHub raw URLs.
-
-![GitHub HTML Preview Local screenshot](docs/images/ss1.png)
 
 ## Highlights
 
